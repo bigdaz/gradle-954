@@ -1,0 +1,24 @@
+repositories {
+  ivy { url 'ivy-repo' }
+}
+configurations {
+    myConf
+}
+
+dependencies {
+    myConf group: 'org.gradle.sample', name: 'sample-lib', version: '1.0.0', configuration: 'default'
+}
+
+task printArtifacts {
+    doLast {
+        configurations.myConf.files.each {
+          println it
+        }
+    }
+}   
+
+task assertArtifacts {
+    doLast {
+        assert configurations.myConf.files.size() == 2
+    }
+}
